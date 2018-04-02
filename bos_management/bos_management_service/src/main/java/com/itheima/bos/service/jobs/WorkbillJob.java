@@ -20,6 +20,7 @@ public class WorkbillJob {
     private WorkbillRepository workbillRepository;
 
     public void sendMail() {
+        System.out.println("66666666666666666666666666666666");
         List<WorkBill> list = workbillRepository.findAll();
 
         String emailBody = "编号\t快递员\t取件状态\t时间<br/>";
