@@ -68,6 +68,30 @@
 		alert("导入");
 	}
 
+	//导出图表
+	function doExportCharts() {
+		//发起请求查询数据
+		$.post("../../areaAction_exportColumnCharts.action", function(data) {
+			// 打开窗口
+			$("#chartWindow").window("open");
+			$('#container').highcharts({
+		        title: {
+		            text: '分区分布'
+		        },
+		        subtitle:{text:'------007统计'},
+		        xAxis: {
+		            categories: data.name
+		        },
+		        series: [{
+		            type: 'column',
+		            name: '分区数量',
+		            data: data.data
+		        }]
+		    });
+		});
+		
+	}
+	
 	//工具栏
 	var toolbar = [ {
 		id : 'button-search',
@@ -99,6 +123,11 @@
 		text : '导出',
 		iconCls : 'icon-undo',
 		handler : doExport
+	}, {
+		id : 'button-exportChart',
+		text : '导出图表',
+		iconCls : 'icon-redo',
+		handler : doExportCharts
 	} ];
 	// 定义列
 	var columns = [ [ {
@@ -314,7 +343,7 @@
 	<div class="easyui-window" title="分区分布图" id="chartWindow"
 		collapsible="false" minimizable="false" maximizable="false"
 		style="top: 20px; left: 200px">
-		<div id="container"></div>
+		<div id="container" style="min-width: 400px; height: 400px"></div>
 	</div>
 
 	<!-- 查询分区 -->
