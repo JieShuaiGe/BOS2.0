@@ -1,7 +1,9 @@
 package com.itheima.bos.web.action.system;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 
+import com.itheima.bos.domain.system.Menu;
 import com.itheima.bos.domain.system.Permission;
 import com.itheima.bos.domain.system.Role;
 import com.itheima.bos.service.system.RoleService;
@@ -87,4 +90,53 @@ public class RoleAction extends CommonAction<Role> {
         list2json(list, jsonConfig);
         return NONE;
     }
+    @Action(value = "roleAction_edit", results = {@Result(name = "success",
+    location = "/pages/system/role.html", type = "redirect")})
+    public String edit() {
+
+     roleService.edit(getModel(), menuIds, permissionIds);
+    return SUCCESS;
+}
+    @Action(value ="roleAction_findOne")
+   public String findOne() throws IOException{
+    System.out.println(getModel().getId());
+    Role  role= roleService.findOne(getModel());
+       Set<Permission> permissions = role.getPermissions();
+       List<Permission> list =new ArrayList<>();
+       for (Permission permission : permissions) {
+    	   list.add(permission);
+	}
+    System.out.println(list.get(0));
+    JsonConfig jsonConfig = new JsonConfig();
+    jsonConfig.setExcludes(new String[] {"roles"});
+    list2json(list, jsonConfig);
+    
+    
+    return NONE;
+}
+   @Action(value ="roleAction_findTree")
+public String findTree() throws IOException{
+ System.out.println(getModel().getId());
+ Role  role= roleService.findOne(getModel());
+    Set<Menu> menus = role.getMenus();
+    List<Menu> list =new ArrayList<>();
+    
+    for (Menu menu : menus) {
+    	 list.add(menu);
+    }
+    System.out.println(list.get(0).getId());
+    JsonConfig jsonConfig = new JsonConfig();
+    jsonConfig.setExcludes(new String[] {"roles","childrenMenus","parentMenu","children"});
+    list2json(list, jsonConfig);
+    
+    
+    return NONE; 	
+   }
+   
+    
+    
+ 	  
+	
+
+ 
 }

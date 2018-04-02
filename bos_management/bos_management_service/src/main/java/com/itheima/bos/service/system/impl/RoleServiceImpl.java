@@ -1,5 +1,7 @@
 package com.itheima.bos.service.system.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -65,8 +67,8 @@ public class RoleServiceImpl implements RoleService {
         if (StringUtils.isNotEmpty(menuIds)) {
             String[] split = menuIds.split(",");
             for (String menuId : split) {
-                Menu menu = menuRepository.findOne(Long.parseLong(menuId));
-                role.getMenus().add(menu);
+            	 Menu menu = menuRepository.findOne(Long.parseLong(menuId));
+                 role.getMenus().add(menu);
             }
         }
 
@@ -79,5 +81,39 @@ public class RoleServiceImpl implements RoleService {
             }
         }
     }
+
+	@Override
+	public void edit(Role role, String menuIds, Long[] permissionIds) {
+		 
+		 
+		 
+	        if (StringUtils.isNotEmpty(menuIds)) {
+	        	String[] split = menuIds.split(",");
+	            for (String menuId : split) {
+	            		 Menu menu = new Menu();
+	                 menu.setId(Long.parseLong(menuId));
+	                 role.getMenus().add(menu);
+	            }
+	        }
+
+	        if (permissionIds != null && permissionIds.length > 0) {
+	        	
+	            for (Long permissionId : permissionIds) {
+	            	
+	            	Permission permission = new Permission();
+	                permission.setId(permissionId);
+	                role.getPermissions().add(permission);
+	            }
+	        }
+		 
+	        roleRepository.save(role);
+	}
+
+	@Override
+	public Role findOne(Role model) {
+		
+		  
+		return roleRepository.findOne(model.getId());
+	}
 
 }

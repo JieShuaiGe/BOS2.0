@@ -79,16 +79,17 @@ public class CommonAction<T> extends ActionSupport implements ModelDriven<T> {
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(json);
     }
-
+    
     public void list2json(List list, JsonConfig jsonConfig)
             throws IOException {
-        String json;
+    	String json;
 
         if (jsonConfig != null) {
             json = JSONArray.fromObject(list, jsonConfig).toString();
         } else {
             json = JSONArray.fromObject(list).toString();
         }
+       
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(json);
