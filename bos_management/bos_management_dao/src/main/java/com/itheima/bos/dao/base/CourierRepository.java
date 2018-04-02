@@ -25,4 +25,8 @@ public interface CourierRepository extends JpaRepository<Courier, Long>,
     void updateDelTagById(Long id);
 
     List<Courier> findByDeltagIsNull();
+
+    @Modifying
+    @Query("update Courier set deltag = 0 where id = ?")
+	void updateRetTagById(long parseLong);
 }

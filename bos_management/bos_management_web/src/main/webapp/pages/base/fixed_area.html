@@ -220,7 +220,9 @@
 			url : "../../fixedAreaAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
-			onDblClickRow : doDblClickRow
+			onDblClickRow : function(index, row){
+				doDblClickRow(row.id)
+			}
 		});
 
 		// 添加、修改定区
@@ -250,14 +252,14 @@
 
 	});
 
-	function doDblClickRow() {
-		alert("双击表格数据...");
+	function doDblClickRow(id) {
+		//alert("双击表格数据..."+id);
 		$('#association_subarea').datagrid({
 			fit : true,
 			border : true,
 			rownumbers : true,
 			striped : true,
-			url : "../../data/association_subarea.json",
+			url : "../../subAreaAction_findAssociatedSubAreas.action?id="+id,
 			columns : [ [ {
 				field : 'id',
 				title : '分拣编号',
@@ -297,17 +299,17 @@
 					return "";
 				}
 			}, {
-				field : 'addresskey',
+				field : 'keyWords',
 				title : '关键字',
 				width : 120,
 				align : 'center'
 			}, {
-				field : 'startnum',
+				field : 'startNum',
 				title : '起始号',
 				width : 100,
 				align : 'center'
 			}, {
-				field : 'endnum',
+				field : 'endNum',
 				title : '终止号',
 				width : 100,
 				align : 'center'
@@ -317,8 +319,8 @@
 				width : 100,
 				align : 'center'
 			}, {
-				field : 'position',
-				title : '位置',
+				field : 'assistKeyWords',
+				title : '辅助关键字',
 				width : 200,
 				align : 'center'
 			} ] ]
@@ -328,14 +330,14 @@
 			border : true,
 			rownumbers : true,
 			striped : true,
-			url : "../../data/association_customer.json",
+			url : "../../fixedAreaAction_findAssociatedCustomers.action?id="+id,
 			columns : [ [ {
 				field : 'id',
 				title : '客户编号',
 				width : 120,
 				align : 'center'
 			}, {
-				field : 'name',
+				field : 'username',
 				title : '客户名称',
 				width : 120,
 				align : 'center'

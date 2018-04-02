@@ -201,4 +201,12 @@ public class CourierAction extends CommonAction<Courier> {
         return NONE;
     }
 
+    // 批量还原
+    @Action(value = "courierAction_batchRet",
+            results = {@Result(name = "success",
+                    location = "/pages/base/courier.html", type = "redirect")})
+    public String batchRet() {
+        courierService.batchRet(ids);
+        return SUCCESS;
+    }
 }

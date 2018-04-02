@@ -70,4 +70,17 @@ public class CourierServiceImpl implements CourierService {
 
         return courierRepository.findByDeltagIsNull();
     }
+
+	@Override
+	public void batchRet(String ids) {
+		 if (StringUtils.isNotEmpty(ids)) {
+	            // 切割数据
+	            String[] split = ids.split(",");
+	            for (String id : split) {
+	                courierRepository.updateRetTagById(Long.parseLong(id));
+	            }
+	        }
+		
+		
+	}
 }
