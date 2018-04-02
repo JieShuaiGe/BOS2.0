@@ -162,8 +162,5 @@ public class FixedAreaAction extends CommonAction<FixedArea> {
 
         return SUCCESS;
     }
-    
-       
-
        
 }
