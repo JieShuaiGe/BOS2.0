@@ -22,5 +22,6 @@ public interface AreaService {
 
     List<Object[]> exportCharts();
 
+	List<Object[]> exportColumnCharts();
 }
   

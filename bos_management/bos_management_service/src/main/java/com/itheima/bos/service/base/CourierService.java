@@ -28,4 +28,7 @@ public interface CourierService {
 
 	void batchRet(String ids);
 
+	List<Courier> findAssociatedCourier(Long id);
+
+
 }
