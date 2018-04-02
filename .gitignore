@@ -46,3 +46,4 @@
 /itheimaUtils/itheimaUtils.iml
 /middleware/middleware.iml
 /portal/portal.iml
+/bos_management/bos_management_web/src/main/resources/applicationContext.xml
