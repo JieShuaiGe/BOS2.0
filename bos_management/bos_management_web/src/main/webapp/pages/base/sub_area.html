@@ -82,9 +82,15 @@
 		        xAxis: {
 		            categories: data.name
 		        },
+				yAxis: {
+		            min: 0,
+		            title: {
+		                text: '分区数量 (个)'
+		            }
+		        },
 		        series: [{
 		            type: 'column',
-		            name: '分区数量',
+		            name: '分区统计',
 		            data: data.data
 		        }]
 		    });
