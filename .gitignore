@@ -42,3 +42,7 @@
 /bos_management/bos_management_dao/.classpath
 /bos_management/bos_management_dao/.gitignore
 /bos_management/bos_management_dao/.project
+/.idea
+/itheimaUtils/itheimaUtils.iml
+/middleware/middleware.iml
+/portal/portal.iml

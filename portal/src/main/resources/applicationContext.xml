@@ -59,14 +59,14 @@
 	-->
 
 	<amq:connectionFactory userName="admin" password="admin"
-		id="amqConnectionFactory" brokerURL="tcp://localhost:61616"></amq:connectionFactory>
+		id="amqConnectionFactory" brokerURL="tcp://localhost:61616"/>
 	<!--
 		################################# 指定Spring Caching连接工厂 #################################
 	-->
 	<bean id="connectionFactory"
 		class="org.springframework.jms.connection.CachingConnectionFactory">
 		<!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
-		<property name="targetConnectionFactory" ref="amqConnectionFactory"></property>
+		<property name="targetConnectionFactory" ref="amqConnectionFactory"/>
 		<!-- Session缓存数量 -->
 		<property name="sessionCacheSize" value="100" />
 	</bean>
@@ -81,4 +81,5 @@
 		<!--false : 队列模式,也叫点对点模式 -->
 		<property name="pubSubDomain" value="false" />
 	</bean>
+
 </beans>
