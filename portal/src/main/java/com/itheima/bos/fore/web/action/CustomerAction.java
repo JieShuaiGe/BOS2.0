@@ -3,10 +3,7 @@ package com.itheima.bos.fore.web.action;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import javax.jms.JMSException;
-import javax.jms.MapMessage;
-import javax.jms.Message;
-import javax.jms.Session;
+import javax.jms.*;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -59,7 +56,7 @@ public class CustomerAction extends ActionSupport
 
         // 随机生成验证码
         final String code = RandomStringUtils.randomNumeric(6);
-        System.out.println(code);
+        System.out.println("收集验证码:--->"+code);
         // 储存验证码
         ServletActionContext.getRequest().getSession()
                 .setAttribute("serverCode", code);
@@ -113,12 +110,25 @@ public class CustomerAction extends ActionSupport
             // 存储验证码
             redisTemplate.opsForValue().set(model.getTelephone(), activeCode, 1,
                     TimeUnit.DAYS);
-            String emailBody =
+            final String emailBody =
                     "感谢您注册本网站的帐号，请在24小时之内点击<a href='http://localhost:8280/portal/customerAction_active.action?activeCode="
                             + activeCode + "&telephone=" + model.getTelephone()
                             + "'>本链接</a>激活您的帐号";
             // 发送激活邮件
-            MailUtils.sendMail(model.getEmail(), "激活邮件", emailBody);
+           //利用ActiveMQ分离邮件--By Vincent Liao
+          //  MailUtils.sendMail(model.getEmail(), "激活邮件", emailBody);
+         jmsTemplate.send("bos_activeMail", new MessageCreator() {
+          @Override
+          public Message createMessage(Session session) throws JMSException {
+           MapMessage message = session.createMapMessage();
+           message.setString("emailAddress", model.getEmail());
+           message.setString("emailBody", emailBody);
+
+           System.out.println("---------------email already send to activeMQ");
+           return message;
+          }
+         });
+
 
             return SUCCESS;
         }
