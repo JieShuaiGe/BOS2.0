@@ -161,7 +161,7 @@ public class FixedAreaAction extends CommonAction<FixedArea> {
                 subAreaIds);
 
         return SUCCESS;
-    }//
+    }
     
        
 
