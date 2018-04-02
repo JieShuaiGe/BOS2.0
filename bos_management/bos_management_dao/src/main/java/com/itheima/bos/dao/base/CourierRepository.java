@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.itheima.bos.domain.base.Courier;
+import com.itheima.bos.domain.base.FixedArea;
 
 /**
  * ClassName:CourierRepository <br/>
@@ -29,4 +30,7 @@ public interface CourierRepository extends JpaRepository<Courier, Long>,
     @Modifying
     @Query("update Courier set deltag = 0 where id = ?")
 	void updateRetTagById(long parseLong);
+
+
+	List<Courier> findByFixedAreas(FixedArea fixedArea);
 }
