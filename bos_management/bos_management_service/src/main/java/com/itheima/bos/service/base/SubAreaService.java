@@ -1,5 +1,6 @@
 package com.itheima.bos.service.base;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -14,13 +15,17 @@ import com.itheima.bos.domain.base.SubArea;
  */
 public interface SubAreaService {
 
-    void save(SubArea model);
+    void save(List<SubArea> list);
 
     Page<SubArea> findAll(Pageable pageable);
 
     List<SubArea> findUnAssociatedSubAreas();
 
     List<SubArea> findAssociatedSubAreas(Long fixedAreaId);
+
+    void save(SubArea model);
+
+  
 
     List<Object[]> exportColumnCharts();
 
