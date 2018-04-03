@@ -33,8 +33,7 @@
 		<!-- **********************修改用户名和密码************************ -->
 		<property name="user" value="crm28" />
 		<property name="password" value="crm28" />
-		<property name="user" value="crm" />
-		<property name="password" value="crm" />
+		
 	</bean>
 	<!-- spring整合JPA -->
 	<bean id="entityManagerFactory"
