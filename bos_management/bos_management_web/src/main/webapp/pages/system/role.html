@@ -97,7 +97,7 @@
 		</script>
 		 <script type="text/javascript">
 		function b(obj)  {
-			alert(obj)
+			
 			
 			// 授权树初始化
 			var setting = {
@@ -131,13 +131,13 @@
 			
 		$.post("../../roleAction_findTree.action",{"id":obj},	
 					function(data3){
-			alert(data3[0].id)
+			
 			var treeObj = $.fn.zTree.getZTreeObj("menuTree");
 			 
 			for(var i = 0;i<data3.length;i++){ 
 				
 				var node = treeObj.getNodeByParam("id", data3[i].id);
-				console.log(node+"............")
+				
 				/*  var node = zTree.getNodeByParam("id",1); */
 				 if(node!=null){
 					 node.checked = true;
