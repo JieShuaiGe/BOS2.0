@@ -85,17 +85,16 @@ public class WaybillAction extends CommonAction<WayBill> {
 				if (row.getRowNum()==0) {
 					continue;
 				}
-				String  wayBillNum= row.getCell(1).getStringCellValue();
-				String  sendProNum= row.getCell(2).getStringCellValue();
-				String  goodsType= row.getCell(3).getStringCellValue();
-				String  sendName= row.getCell(4).getStringCellValue();
-				String  sendMobile= row.getCell(5).getStringCellValue();
-				String  sendAddress= row.getCell(6).getStringCellValue();
-				String  recName= row.getCell(7).getStringCellValue();
-				String  recMobile= row.getCell(8).getStringCellValue();
-				String  recCompany= row.getCell(9).getStringCellValue();
-				String  recAddress= row.getCell(10).getStringCellValue();
-				
+				String  wayBillNum= row.getCell(0).getStringCellValue();
+                String  goodsType= row.getCell(1).getStringCellValue();
+                String  sendProNum= row.getCell(2).getStringCellValue();
+                String  sendName= row.getCell(3).getStringCellValue();
+                String  sendMobile= row.getCell(4).getStringCellValue();
+                String  sendAddress= row.getCell(5).getStringCellValue();
+                String  recName= row.getCell(6).getStringCellValue();
+                String  recMobile= row.getCell(7).getStringCellValue();
+                String  recCompany= row.getCell(8).getStringCellValue();
+                String  recAddress= row.getCell(9).getStringCellValue();
 				WayBill way = new WayBill();
 				way.setWayBillNum(wayBillNum);
 				way.setSendProNum(sendProNum);
@@ -107,11 +106,9 @@ public class WaybillAction extends CommonAction<WayBill> {
 				way.setRecMobile(recMobile);
 				way.setRecCompany(recCompany);
 				way.setRecAddress(recAddress);
-				
 				arr.add(way);
 			}
 			wayBillService.sava(arr);
-			
 			 workbook.close();
 		} catch (Exception e) {
 			  
