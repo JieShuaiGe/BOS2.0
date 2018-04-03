@@ -209,4 +209,15 @@ public class CourierAction extends CommonAction<Courier> {
         courierService.batchRet(ids);
         return SUCCESS;
     }
+    
+    @Action(value = "courierAction_findAssociatedCourier")
+    public String findAssociatedCourier() throws IOException {
+    	List<Courier> list = courierService.findAssociatedCourier(getModel().getId());
+    	
+    	JsonConfig jsonConfig = new JsonConfig();
+    	jsonConfig.setExcludes(new String[]{"fixedAreas"});
+    	
+    	list2json(list, jsonConfig);
+        return NONE;
+    }
 }

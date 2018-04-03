@@ -115,4 +115,12 @@ public class Promotion {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Promotion [id=" + id + ", title=" + title + ", titleImg=" + titleImg
+                + ", activeScope=" + activeScope + ", startDate=" + startDate + ", endDate="
+                + endDate + ", status=" + status + ", description=" + description + "]";
+    }
+
+    
 }
