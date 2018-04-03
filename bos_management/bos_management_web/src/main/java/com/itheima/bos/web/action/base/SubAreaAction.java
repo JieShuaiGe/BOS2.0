@@ -269,19 +269,7 @@ public class SubAreaAction extends CommonAction<SubArea> {
     @Action(value = "subAreaAction_exportColumnCharts")
     public String exportColumnCharts() throws IOException {
         List<Object[]> list = subAreaService.exportColumnCharts();
-        Map<String, Object[]> map = new HashMap<>();
-        String[] name = new String[list.size()];
-        Long[] data = new Long[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            name[i] = (String) (list.get(i))[0];
-            data[i] = (Long) (list.get(i))[1];
-        }
-        map.put("name", name);
-        map.put("data", data);
-        String json = JSONObject.fromObject(map).toString();
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(json);
+        list2json(list, null);
         return NONE;
     }
 }

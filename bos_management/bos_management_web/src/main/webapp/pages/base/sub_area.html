@@ -95,15 +95,21 @@
 	function doExportCharts() {
 		//发起请求查询数据
 		$.post("../../subAreaAction_exportColumnCharts.action", function(data) {
+			var province = new Array()
+			var count = new Array()
+			for(var i=0;i<data.length;i++){
+				province.push(data[i][0])
+				count.push(data[i][1])
+			}
 			// 打开窗口
 			$("#chartWindow").window("open");
 			$('#container').highcharts({
 		        title: {
-		            text: '分区分布'
+		            text: '分区分布图'
 		        },
 		        subtitle:{text:'------007统计'},
 		        xAxis: {
-		            categories: data.name
+		            categories: province
 		        },
 				yAxis: {
 		            min: 0,
@@ -114,7 +120,7 @@
 		        series: [{
 		            type: 'column',
 		            name: '分区统计',
-		            data: data.data
+		            data: count
 		        }]
 		    });
 		});
