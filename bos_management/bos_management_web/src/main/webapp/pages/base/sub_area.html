@@ -104,12 +104,23 @@
 			// 打开窗口
 			$("#chartWindow").window("open");
 			$('#container').highcharts({
-		        title: {
+				chart: {
+		            type: 'column'
+		        },
+		        tooltip: {
+		            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+		            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+		            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+		            footerFormat: '</table>',
+		            shared: true,
+		            useHTML: true
+		        },
+				title: {
 		            text: '分区分布图'
 		        },
 		        subtitle:{text:'------007统计'},
 		        xAxis: {
-		            categories: province
+		        	categories: province
 		        },
 				yAxis: {
 		            min: 0,
@@ -118,8 +129,9 @@
 		            }
 		        },
 		        series: [{
-		            type: 'column',
+		            colorByPoint: true,
 		            name: '分区统计',
+		            showInLegend: false,
 		            data: count
 		        }]
 		    });
