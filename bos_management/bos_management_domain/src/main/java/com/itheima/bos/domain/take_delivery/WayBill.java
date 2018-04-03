@@ -189,7 +189,7 @@ public class WayBill {
     public Area getRecArea() {
         return recArea;
     }
-
+   
     public void setRecArea(Area recArea) {
         this.recArea = recArea;
     }

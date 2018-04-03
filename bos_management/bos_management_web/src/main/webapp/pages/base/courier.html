@@ -28,7 +28,19 @@
 	}
 
 	function doEdit() {
-		alert("修改...");
+		var rows = $("#grid").datagrid("getSelections")
+		if (rows.length == 1) {
+			
+			$("#addWindow").window("open");
+			$("#9527").val(rows[0].id)
+			$("#addWindow").form("load",rows[0]);
+			//$("#stand").val(rows[0].standard.id)
+			$("#stand").combobox("select", rows[0].standard.id);
+			
+			
+		}else{
+			$.messager.alert("提示", "你至少要也只能选择一条数据进行操作", "info")
+		}
 	}
 
 	function doDelete() {
@@ -290,6 +302,7 @@
 			border="false">
 			<form id="courierForm" method="post"
 				action="../../courierAction_save.action">
+				<input type="hidden" name="id" id="9527"  >
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="4">收派员信息</td>
@@ -320,10 +333,10 @@
 					</tr>
 					<tr>
 						<td>快递员类型</td>
-						<td><input type="text" name="type" class="easyui-validatebox"
+						<td><input type="text" name="type"  class="easyui-validatebox"
 							required="true" /></td>
 						<td>取派标准</td>
-						<td><input type="text" name="standard.id"
+						<td><input type="text" id="stand" name="standard.id"
 							class="easyui-combobox"
 							data-options="required:true,valueField:'id',textField:'name',
 											url:'../../standard_findAll.action'" />

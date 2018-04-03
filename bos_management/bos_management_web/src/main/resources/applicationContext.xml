@@ -25,9 +25,9 @@
 		<property name="driverClass"
 			value="oracle.jdbc.driver.OracleDriver" />
 		<property name="jdbcUrl"
-			value="jdbc:oracle:thin:@192.168.45.87:1521:ORCL" />
-		<property name="user" value="BOSJ" />
-		<property name="password" value="123456" />
+			value="jdbc:oracle:thin:@192.168.6.100:1521:ORCL" />
+		<property name="user" value="heima28" />
+		<property name="password" value="heima28" />
 	</bean>
 	<!-- spring整合JPA -->
 	<bean id="entityManagerFactory"
@@ -181,10 +181,7 @@
 		<!-- 指定配置文件的位置 -->
 		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
 	</bean>
-
-
 	
-
 	<!-- 注册任务详情,通过反射的方式调用目标类的目标方法 -->
 	<bean id="jobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -204,11 +201,23 @@
 		<!-- 注入任务详情,闹钟响起的时候要做什么事情 -->
 		<property name="jobDetail" ref="jobDetail"></property>
 	</bean>
-	<!--
-		spring提供的一个工厂类
-		任务工厂类
-		可以简单理解为这是一台手机
-	-->
+	
+	<!-- 定时监测过期promotion -->
+		
+	<bean id="updatePromotionStatusJob" class="com.itheima.bos.service.jobs.UpdatePromotionStatusJob"></bean>
+	<bean id="updatePromotion"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="updatePromotionStatusJob"></property>
+		<property name="targetMethod" value="updateStatus"></property>
+	</bean>
+	
+	<bean id="promotionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="cronExpression">
+			 <value>0 0 0 * * ?</value> 
+		</property>
+		<property name="jobDetail" ref="updatePromotion"></property>
+	</bean>
+	
 	<bean
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<!--
@@ -219,8 +228,8 @@
 			<!-- 指定具体的触发器,可以简单理解为具体的一个闹钟 -->
 			<list>
 				<ref bean="emailTrigger" />
+				<ref bean="promotionTrigger"/>
 			</list>
-
 		</property>
 	</bean>
 
