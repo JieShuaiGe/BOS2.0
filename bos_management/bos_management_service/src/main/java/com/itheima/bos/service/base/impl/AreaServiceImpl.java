@@ -49,4 +49,10 @@ public class AreaServiceImpl implements AreaService {
         return areaRepository.exportCharts();
     }
 
+    @Override
+    public void save(Area area) {
+          
+        areaRepository.save(area);
+    }
+
 }
