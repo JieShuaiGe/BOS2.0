@@ -1,5 +1,6 @@
 package com.itheima.bos.service.base.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,19 @@ public class SubAreaServiceImpl implements SubAreaService {
 
         fixedArea.setId(fixedAreaId);
         return subAreaRepository.findByFixedArea(fixedArea);
+    }
+
+    @Override
+    public void save(List<SubArea> list) {
+          
+        subAreaRepository.save(list);
+    }
+
+   
+
+    @Override
+    public List<Object[]> exportColumnCharts() {
+          
+        return subAreaRepository.exportColumnCharts();
     }
 }
