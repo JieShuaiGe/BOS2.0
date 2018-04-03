@@ -278,7 +278,7 @@
 		var result = $("#searchForm").serializeJson();
 		// 让Datagrid重新发起请求,并把用户输入的查询条件传递给后台
 		$('#grid').datagrid('load', result);
-
+		$('#addWindow').window("close");
 	}
 </script>
 </head>
