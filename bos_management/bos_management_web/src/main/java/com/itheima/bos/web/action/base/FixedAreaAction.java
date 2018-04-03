@@ -111,6 +111,9 @@ public class FixedAreaAction extends CommonAction<FixedArea> {
                     location = "/pages/base/fixed_area.html",
                     type = "redirect")})
     public String assignCustomers2FixedArea() throws IOException {
+		if (customerIds == null || customerIds.length == 0 ) {
+			customerIds = new Long[]{-1L};
+		}
         WebClient.create(
                 "http://localhost:8180/crm/webService/customerService/assignCustomers2FixedArea")
                 .query("fixedAreaId", getModel().getId())
