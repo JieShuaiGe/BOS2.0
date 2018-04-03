@@ -95,6 +95,7 @@ public class WaybillAction extends CommonAction<WayBill> {
                 String  recMobile= row.getCell(7).getStringCellValue();
                 String  recCompany= row.getCell(8).getStringCellValue();
                 String  recAddress= row.getCell(9).getStringCellValue();
+				
 				WayBill way = new WayBill();
 				way.setWayBillNum(wayBillNum);
 				way.setSendProNum(sendProNum);
@@ -106,9 +107,11 @@ public class WaybillAction extends CommonAction<WayBill> {
 				way.setRecMobile(recMobile);
 				way.setRecCompany(recCompany);
 				way.setRecAddress(recAddress);
+				
 				arr.add(way);
 			}
 			wayBillService.sava(arr);
+			
 			 workbook.close();
 		} catch (Exception e) {
 			  

@@ -119,7 +119,7 @@ public class AreaAction extends CommonAction<Area> {
 
             }
             // 执行保存
-            //areaService.save(list);
+            areaService.save(list);
 
             // 释放资源
             hssfWorkbook.close();
