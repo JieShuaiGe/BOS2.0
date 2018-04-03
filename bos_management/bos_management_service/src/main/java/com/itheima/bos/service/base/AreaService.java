@@ -24,12 +24,6 @@ public interface AreaService {
 
 	List<Object[]> exportColumnCharts();
     void save(Area area);
-<<<<<<< .mine
 
-=======
-
->>>>>>> .theirs
-}
-  
 }
   
