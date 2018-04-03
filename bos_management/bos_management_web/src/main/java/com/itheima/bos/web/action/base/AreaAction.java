@@ -45,7 +45,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.json.JsonConfig;
-import net.sf.json.JSONObject;
 
 /**
  * ClassName:AreaServiceAction <br/>
@@ -289,24 +288,5 @@ public class AreaAction extends CommonAction<Area> {
 
         return NONE;
     }
-	 // 查询按照省份进行统计分区
-    @Action(value = "areaAction_exportColumnCharts")
-    public String exportColumnCharts() throws IOException {
-        List<Object[]> list = areaService.exportColumnCharts();
-        Map<String, Object[]> map = new HashMap<>();
-        String[] name = new String[list.size()];
-        Long[] data = new Long[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            name[i] = (String) (list.get(i))[0];
-            data[i] = (Long) (list.get(i))[1];
-        }
-        map.put("name", name);
-        map.put("data", data);
-        JSONObject jsonObject = new JSONObject();
-        String json = jsonObject.fromObject(map).toString();
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(json);
-        return NONE;
-    }
+	
 }

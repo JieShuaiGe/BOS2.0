@@ -22,5 +22,7 @@ public interface SubAreaService {
 
     List<SubArea> findAssociatedSubAreas(Long fixedAreaId);
 
+    List<Object[]> exportColumnCharts();
+
 }
   

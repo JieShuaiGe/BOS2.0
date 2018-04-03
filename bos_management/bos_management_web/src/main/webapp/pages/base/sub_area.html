@@ -71,7 +71,7 @@
 	//导出图表
 	function doExportCharts() {
 		//发起请求查询数据
-		$.post("../../areaAction_exportColumnCharts.action", function(data) {
+		$.post("../../subAreaAction_exportColumnCharts.action", function(data) {
 			// 打开窗口
 			$("#chartWindow").window("open");
 			$('#container').highcharts({

@@ -1,7 +1,9 @@
 package com.itheima.bos.web.action.base;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
@@ -29,6 +31,7 @@ import com.itheima.bos.service.base.SubAreaService;
 import com.itheima.bos.web.action.CommonAction;
 import com.itheima.utils.FileDownloadUtils;
 
+import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 /**
@@ -167,4 +170,23 @@ public class SubAreaAction extends CommonAction<SubArea> {
         return NONE;
     }
     
+    // 查询按照省份进行统计分区
+    @Action(value = "subAreaAction_exportColumnCharts")
+    public String exportColumnCharts() throws IOException {
+        List<Object[]> list = subAreaService.exportColumnCharts();
+        Map<String, Object[]> map = new HashMap<>();
+        String[] name = new String[list.size()];
+        Long[] data = new Long[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            name[i] = (String) (list.get(i))[0];
+            data[i] = (Long) (list.get(i))[1];
+        }
+        map.put("name", name);
+        map.put("data", data);
+        String json = JSONObject.fromObject(map).toString();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(json);
+        return NONE;
+    }
 }

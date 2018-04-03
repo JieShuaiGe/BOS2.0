@@ -53,4 +53,10 @@ public class SubAreaServiceImpl implements SubAreaService {
         fixedArea.setId(fixedAreaId);
         return subAreaRepository.findByFixedArea(fixedArea);
     }
+
+    @Override
+    public List<Object[]> exportColumnCharts() {
+          
+        return subAreaRepository.exportColumnCharts();
+    }
 }
